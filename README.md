@@ -1,5 +1,6 @@
 # Parkland
 
+![parkland.jpg](parkland.jpg)
 Stack: HTML, CSS, JavaScript, JavaScript, Node.js, EJS, PostgresQL, Stripe API, WeatherAPI, Mocha, Chai
 
 This is an academic project built in a group of 4. Some of the codes might not written with a best practice in mind due to some of the members having the first exposure to web development in this course. However, I have learned a great deal in how to make a full-stack web application.
