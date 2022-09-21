@@ -1,0 +1,47 @@
+<footer id="footer" class="navbar" style="position:absolute;bottom: 0px; width: 100%; margin-bottom: 0px;">
+  <nav>
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/aboutus"></span>About us</a>
+        </li>
+        <li>
+          <a href="/careers"></span>Careers</a>
+        <li>
+          <a href="/privacypolicy"></span>Privacy Policy</a>
+        </li>
+        <!-- <li>
+          <a href="/forum"></span>Forum</a>
+        </li> -->
+        <li>
+          <a href="/weather"></span>Weather 
+            <!-- (NEW!)  -->
+          </a>
+        </li>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/contactus"></span>Contact us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<script>
+  let footer = document.querySelector('#footer');
+  let previousFooter = document.querySelector('#footer').previousElementSibling;
+  function changeFooterPosition() {
+    if (previousFooter.getBoundingClientRect().bottom   + window.scrollY >= footer.getBoundingClientRect().top  + window.scrollY) {
+      footer.style.position = 'relative';
+    } else {
+      footer.style.position = 'absolute';
+    }
+  }
+
+  window.addEventListener("resize", () => {
+    changeFooterPosition();
+  });
+
+  changeFooterPosition();
+</script>

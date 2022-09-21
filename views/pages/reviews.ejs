@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <style>
+    .review-container {
+      display: flex;
+      max-width: 1200px;
+      margin: 100px  auto;
+      flex-wrap: wrap;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+    
+    }
+
+    .ride {
+      border: 1px solid black;
+      margin: 1em;
+      padding: 2em;
+      width: 300px;
+      height: 420px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #256D85;
+      border-radius: 5px;
+      transition: transform 1s;
+    }
+
+    .ride:hover {
+      transform: scale(1.1, 1.1);
+    }
+
+    img {
+      border-radius: 20px;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include ("../partials/nav.ejs") %>
+  <div class="review-container">
+    
+    <% rides.forEach((ride) => { %>
+      <a href="/rides/<%=ride.rideid%>" style="color: black;">
+        <div class="ride">
+          <img src="img<%=ride.imagelink%>.jpg" width="250" height="250" alt="">
+          <h2><%= ride.ridename %></h2>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+
+  <%- include ("../partials/footer.ejs") %>
+
+</div>
+</body>
+
+</html>

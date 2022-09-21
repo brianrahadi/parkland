@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <%- include ("../partials/header.ejs") %>
+</head>
+<body id="wrap_login">
+    <%- include ("../partials/nav.ejs", {loggedIn: false}) %>
+    <div id="login-container">
+        <h1 id="header_style">Sign in to your account</h1>
+
+        <p class="ques">
+            New here? 
+            <a href="/adduser"> Create an account</a>
+        </p>
+
+        <% if(invalid_login.value=='1') { %>
+            <p class="error" style="text-align: center"> Your entry does not match our records. Please try again.</p>
+        <%  invalid_login.value='0';} %>
+        <form action="/login" method="post">
+            <p>
+                <input type="text" id = inputBox name="uname" value="" placeholder="Username">
+            </p>
+            <p>
+                <input type="password" id = inputBox name="password" value="" placeholder="password">
+            </p>
+            <p>
+                <input type="submit" id = "logIn" value="Log in">
+            </p>
+
+            <!-- <p class="hl">
+                <span class="hl-innertext">or</span>
+            </p> -->
+            
+            <!-- <div id="social-login">
+                <a href="#" class="fb btn">
+                    <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                </a>
+                <a href="#" class="twitter btn">
+                    <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+                </a>
+                <a href="#" class="google btn">
+                    <i class="fa fa-google fa-fw"></i> Login with Google+
+                </a>
+            </div> -->
+
+            <p class="psw">Forgot <a href ="/forgotPsw">password?</a>
+            </p>
+
+
+        </form>
+    </div>
+
+
+</body>
+</html>

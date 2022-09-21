@@ -1,0 +1,38 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+
+<nav class="navbar">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/"><span class="glyphicon glyphicon-home"></span></a>
+        <!-- <a href="/"><img src="logo.jpg" alt="home" style="width:60px;height:50px;"></a> -->
+      </li>
+     
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      
+
+      <% if (loggedIn) { %>
+        <li>
+          <% if (info.access == 'user') { var api='dashboard' }
+             else { var api='admin' } %>
+          <a href="/<%=api%>/<%=info.uid%>"><span class="glyphicon glyphicon-user"></span> Hello, <%=info.username %> </a>
+        </li>
+        <li>
+          <a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a>
+        </li>
+      <% } else { %>
+        <li>
+          <a>  Gain access to exclusive deals by creating an account! </a>
+        </li>
+        <li>
+          <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+        </li>
+        <li class="navbar-right">
+          <a href="/adduser"><span class="glyphicon glyphicon-user"></span> Sign up</a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
+

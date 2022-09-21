@@ -1,0 +1,77 @@
+<form action="/transfer" method="post" onsubmit="">
+  <label for="card1" style="font-size: 30px;margin-left:1px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Transfer from : </label>
+  <select
+    name="card1"
+    id="card1"
+    style="font-size: 25px;  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
+  >
+    <option value="-1" id = "<%=info.balance%>" >Balance</option>
+    <% cards.forEach(function(r) { %>
+    <option value="<%=r.cid%>" id="<%=r.balance%>"> <%=r.cname%></option>
+    <% }) %>
+  </select>
+  <br />
+
+  <label for="card2" style="font-size: 30px; margin-left:1px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Transfer to    :</label>
+  <select
+    name="card2"
+    id="card2"
+    style="font-size: 25px; margin-left: 20px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
+  >
+    <option value="-1" id = "<%=info.balance%>" >Balance</option>
+    <% cards.forEach(function(r) { %>
+    <option value="<%=r.cid%>"> <%=r.cname%></option>
+    <% }) %>
+  </select>
+  <br />
+  <label
+    for="amount"
+    style="width:300px; margin-left: 1px; font-size: 30px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"
+    >Enter amount : $
+  </label>
+  <input
+    type="number"
+    name="amount"
+    id="amount"
+    onchange="validate()"
+    min="1"
+    required
+    style="width:200px; margin-left: -100px;
+           box-sizing: border-box;
+           border: 2px solid #ccc;
+           border-radius: 4px;
+           -webkit-transition: 0.5s;
+           transition: 0.5s;
+           outline:none;
+           border-radius: 15px;
+           text-indent:10px;
+           font-family:Arial, Helvetica, sans-serif;
+           font-weight:bolder;"
+  />
+  <br>
+  <button type="submit" style=" background-color: aquamarine;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 25px;">
+    Transfer
+  </button>
+</form>
+
+
+<script>
+  function validate() {
+    var ans = document.getElementById("card1");
+    var card_id = ans.value;
+    var ids = document.getElementsByTagName("option");
+    var actual_balance = 0;
+    var transfer = document.getElementById("amount").value;
+    for (let i = 0; i < 4; i++) {
+      if (ids[i].value == card_id) {
+        console.log(ids[i].id);
+        actual_balance = ids[i].id;
+      }
+    }
+    console.log(actual_balance, transfer);
+    if (parseInt(actual_balance) < parseInt(transfer)) {
+      document.getElementById("amount").value = "";
+      alert("The transfer amount exceeds the balance");
+    }
+  }
+</script>

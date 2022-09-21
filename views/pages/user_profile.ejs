@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      .container-all {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 100px;
+        flex: 1;
+      }
+
+      h1 {
+        position:initial;
+        left: 0px !important;
+
+      }
+
+      form {
+        left: 0px !important;
+      }
+
+      .container-all-with-email {
+        display: flex;
+        flex-direction: column;
+      }
+      @media screen and (max-width: 1200px) {
+        .container-all {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <%- include ("../partials/nav.ejs") %>
+    <div class="container-all-with-email">
+    <div class="container-all">
+    <!-------------------------User Info-------------------------->
+      <div id="userInfo-container">
+        <form action="/user-api/updateuser/<%=info.uid%>" method="post" >
+          <p style="font-size:50px">
+            User Info
+          </p>
+          <p>
+            <label>First Name</label> <br />
+            <input
+              type="text"
+              name="f_name"
+              maxlength="20"
+              value="<%=info.f_name %>"
+              id="inputBox_admin"
+            />
+          </p>
+          <p>
+            <label>Last Name</label> <br />
+            <input
+              type="text"
+              name="l_name"
+              maxlength="20"
+              value="<%=info.l_name %>"
+              id="inputBox_admin"
+            />
+          </p>
+          <p>
+            <label>Username</label> <br />
+            <input
+              type="text"
+              name="uname"
+              value="<%=info.username %>"
+              readonly
+              id="inputBox_admin"
+            />
+          </p>
+          <p>
+            <label>Email</label> <br />
+            <input
+              type="text"
+              name="email"
+              maxlength="50"
+              value="<%=info.email %>"
+              id="inputBox_admin"
+            />
+          </p>
+          <span>
+            <label for="offer"
+              >I want to receive offers from this website</label
+            >
+            <br />
+            <% if (info.get_prom && info.get_prom == '1') { %>
+            <input type="checkbox" id="offer" name="offer" checked />
+            <% } else { ;%>
+            <input type="checkbox" id="offer" name="offer" />
+            <% } %>
+          </span>
+          <input type="hidden" name="access" value="user" />
+          <br />
+          <input type="submit" value="Update User" id="adminButton" />
+          <br />
+
+          <br />
+          <a href="/changepw/<%=info.uid%>">Change Password</a> <br />
+          <a href="/verifyKids/<%=info.uid%>">Add kids info</a>
+        </form>
+        </div>
+
+      <!------------------------------My Cards-------------------------------------->
+      <div id="myCard-Hcontainer">
+      <div id="myCard-Vcontainer">  
+      <p style="font-size:45px;">My Cards</p>
+        <% cards.forEach(function(r) { %>
+        <div
+          class="card"
+          id="<%= r.cid%>"
+          onclick="location.href='/card/<%= r.cid%>';"
+          display="block"
+        >
+          <p style="margin-left:100px;margin-top:5px">
+            <%=r.cname%>
+          </p>
+          <!-- <form action="">
+            <p
+              type="text"
+              name="name"
+              value="<%=r.cname%>"
+            >
+              <%=r.cname%> -->
+          <!-- </p> -->
+          <!-- </form> -->
+          <% var num = r.cid.toString(); %> <% while(num.length < 7) num = "0" +
+        num;
+        const num_space = num.split('').join(' ');
+         %>
+      
+          <p style="margin-left:10px"> <%= num_space %></p>
+          <p class="balance" style="margin-left:10px">
+            Balance : $ <%= r.balance %>
+          </p>
+        </div>
+        <% }) %> <% if(cards.length < 3) { %>
+        <form name="addCard" action="/user-api/addcard" method="post">
+          <input type="hidden" name="uid" value="<%=info.uid %>" />
+          <input
+            type="submit"
+            id="logIn"
+            value="Add a new card"
+            
+          />
+        </form>
+        <% } %>
+      </div>
+      </div>
+      <!---------------------------Transfer Money------------------------------->
+      <!-- <div id="transfer-Hcontainer">   -->
+        <div id="transfer-Vcontainer">
+              <p onclick="myFunc()">
+                <h2>Transfer Money </h2>
+                <span class="glyphicon glyphicon-chevron-down" ></span>
+              </p>
+              <div>
+                <%- include ("../pages/transfer.ejs") %>
+              </div>
+          </div>
+        <!-- </div> -->
+    </div>
+
+<!-------------------------- Email Verification------------------------------->
+
+    <% if (info.status != 'active') { %>
+      <div id="email-container">  
+      <div id="verifyEmail">
+        <p style="color:black ; font-size: 30px; margin-bottom:20px;margin-left:10px;margin-top: 20px;">***Warning*** Please Verify Email Address!!!</p>
+        <form action="/verify_email" method="post">
+          <label for="code" style="font-size:30px;margin-top:-10px">Please enter the code you received by email</label>
+          <input type="text" name="code" />
+          <button type="submit" style ="font-size: 30px;background-color: aquamarine; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Verify</button>
+        </form>
+        <br>
+        <% if (info.verify_status == 0) { %>
+        <p >Wrong code! Try again</p>
+        <% } %>
+      </div>
+    </div>
+      <% } %>
+  </div>
+
+  <!---------------------------Footer-------------------------------------->
+  <%- include ("../partials/footer.ejs") %>
+  </body>
+
+
+
+  <script>
+    function myFunc() {
+      var disp = document.getElementById("transfer").style.display;
+      if (disp == "none")
+        document.getElementById("transfer").style.display = "block";
+      else document.getElementById("transfer").style.display = "none";
+    }
+  </script>
+
+  <style>
+    input{
+      width:100%;
+    }
+    #h1{
+      margin:auto;
+      max-width:1500px;
+    }
+    /* #userInfo-container {
+      margin:auto;
+      max-width: 500px;
+      max-height:auto;
+      display:flex;
+    }
+    #myCard-Vcontainer {
+      margin:auto;
+      max-height: auto;
+      max-width: 500px;
+    }
+    #myCard-Hcontainer {
+      margin:auto;
+      margin-top:-1050px;
+      display:flex;
+
+      height:1500px;
+      margin-left:200px;
+      max-height:auto;
+    } */
+    /* #transfer-Hcontainer {
+      margin:auto;
+      margin-left:1000px;
+      margin-top:-1150px;
+      max-width: 500px;
+      max-height:2000px; 
+      display:flex;
+    } */
+
+    #transfter-Vcontainer{
+      min-width: 500px;
+      margin: auto;
+      max-width: 500px;
+      max-height:1000px;
+    }
+
+    /* #footer{
+      position: fixed;
+      height:80px;
+      width:100%;
+      left:0px;
+      right:0px;
+      margin-bottom:0px;
+      bottom:0px;
+    } */
+
+    #email-container{
+      margin:auto;
+      /* margin-top:-360px; */
+      /* max-width:1000px; */
+      /* position:fixed; */
+      /* max-height:450px; */
+      height:270px;
+      /* border-width: 3px; */
+      display:flex; 
+      width: 500px;
+      margin-bottom: 250px;
+      border-color: black;
+      border-style: solid;
+      background-color: rgb(255, 141, 141);
+      padding: 25px;
+    }
+
+    #verifyEmail{
+      /* top: 10px; left:500px; width:70%; */
+      font-family: 'Roboto', sans-serif;
+      font-size:50px;
+    }
+
+    .float-right {
+   float:right;
+    }
+
+    #footer {
+      margin-top: 50px;
+      position: relative !important;
+    }
+
+  </style>
+
+</html>
+
+

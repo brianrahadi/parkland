@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Kids</title>
+  </head>
+
+  
+  <body>
+    <div id="children-container">
+    <h1>Children Verification Form</h1>
+    <% if(request.length == 0){%> 
+    <p style="font-size:30px;margin-top:35px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;margin-left:140px;">Please include all the required information (exactly as it appears)</p>
+    <% } else{ %>
+      <p style="font-size:30px;margin-top:35px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;margin-left:140px;color: red;">Rejected! Please confirm the correctness of the provided information and resubmit</p>
+    <%}%>
+    <form action="/verifyKids" method="post" enctype="multipart/form-data">
+
+        <label for="fname">First name </label><br><input type="text" maxlength="15" name="fname" id=""required ><br>
+        <label for="lname">Last name </label><br><input type="text" maxlength="15" name="lname" id=""required><br>
+        <label for="lname">Passport number</label><br><input type="number" max="99999999" name="passNum" id=""required><br>
+        <label for="dob">Date of Birth</label><br><input type="date" name="dob" id=""required> <br>
+        <input type="file" id="image" name="image" value="asdf"  accept="image/png, image/jpg" required>
+        <div style ="font-size: smaller;">
+          File type .png & .jpg accepted. <br>
+        </div>
+        <label for="kidsNum">Please include all underage children</label>
+        <input type="hidden" name="kidsNum" id="kidsNum" value='3'>
+        <button type="button" onclick="createForms(1)">+</button>
+        <button type="button" onclick="createForms(-1)">-</button>
+        <div id="kids">
+          <span style="margin-left:150px">First Name</span><span style="margin-left:135px">Last Name</span><span style="margin-left:90px;">Date of Birth</span><br>
+          <label> Child 1</label> <input type="text" name="fn1" maxlength="15" id="" required> <input type="text" name="ln1" maxlength="15" id=""required> <input type="date" name="dob1" id=""required> <br>
+          <span style="margin-left:150px">First Name</span><span style="margin-left:135px">Last Name</span><span style="margin-left:90px;">Date of Birth</span><br>
+          <label> Child 2</label> <input type="text" name="fn2" maxlength="15" id=""required> <input type="text" name="ln2" maxlength="15" id=""required> <input type="date" name="dob2" id=""required> <br>
+          <span style="margin-left:150px">First Name</span><span style="margin-left:135px">Last Name</span><span style="margin-left:90px;">Date of Birth</span><br>
+          <label> Child 3</label> <input type="text" name="fn3" maxlength="15" id=""required> <input type="text" name="ln3" maxlength="15" id=""required> <input type="date" name="dob3" id=""required> <br>
+        </div>
+        <input type="submit" value="Submit for approval">
+    </form>
+
+    <form>
+      <img
+        src="https://cdn.pixabay.com/photo/2017/01/31/15/31/boy-2025099_1280.png"
+        alt="logo"
+        class="logo"
+        />
+    </form>
+  </div>
+  <div id="footer">
+  <%- include ("../partials/footer.ejs") %>
+  </div>
+  </body>
+
+  <script>
+    function createForms(x){
+        i = parseInt(document.getElementById("kidsNum").value)
+        console.log(i);
+        if(x==1){
+          i++;
+          document.getElementById("kidsNum").value++;
+          var fname = "fn" + i.toString();
+          var lname = "ln" + i.toString();
+          var dob = "dob" + i.toString();
+          var p = document.createElement("p")
+          p.innerHTML += "<span style='margin-left:150px'>First Name</span><span style='margin-left:135px'>Last Name</span><span style='margin-left:90px''>Date of Birth<span><br>"
+          p.innerHTML += `<label>Child ${i} </label><input type='text' name='${fname}'maxlength="15"><input type='text' name='${lname}' maxlength="15"><input type="date" name='${dob}' id=""> <br>`
+          document.getElementById("kids").appendChild(p);
+        }
+        else if(x==-1 && i != 3){
+          let form = document.getElementById("kids")
+          form.removeChild(form.lastElementChild)
+          document.getElementById("kidsNum").value--;
+      }
+    }
+  </script>
+
+  <style>
+    #children-container{
+      margin:auto;
+      max-width:1500px;
+      max-height:auto;
+    }
+    h1{
+      font-size:50px;
+      color:#000;
+      margin-top:50px;
+      margin-left:-30px;
+      font-style:inherit;
+    }
+
+    /* p{
+      font-size: 30px;
+      color: #000;
+      margin-top: 35px;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      margin-left: 140px;
+    } */
+
+    input[type=text],textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid #DDDDDD;
+  text-indent: 10px;
+  width:15%;
+    }
+    input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid rgba(81, 203, 238, 1);
+}
+
+input[type=date],textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: -3px 1px 3px 0px;
+  border: 3px solid #DDDDDD;
+  width:12%;
+  cursor: pointer;
+    }
+    input[type=date]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 0px 1px 3px 0px;
+  border: 3px solid rgba(81, 203, 238, 1);
+  width:12%;
+}
+
+input[type=number],textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid #DDDDDD;
+  text-indent:10px;
+  width:15%;
+    }
+    input[type=number]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid rgba(81, 203, 238, 1);
+}
+  
+
+    input[type=file]{
+      margin-top:20px;
+      font-size:15px;
+    }
+    
+    img{
+      height: 300px;
+      margin-left: 700px;
+      margin-top: -90px;
+    }
+
+    button{
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 4%;
+  margin-bottom:10px;
+}
+
+button:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+button:main,
+button:focus {
+  user-select: auto;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+button:disabled {
+  cursor: auto;
+}
+input[type=submit]{
+background: #0066A2;
+color: white;
+border-style: outset;
+border-color: #0066A2;
+height: 50px;
+width: 200px;
+font: bold15px arial,sans-serif;
+text-shadow: none;
+margin-top:30px;
+}
+
+input[type=submit]:hover{
+background: #016ABC;
+color: #fff;
+border: 1px solid #eee;
+border-radius: 20px;
+box-shadow: 5px 5px 5px #eee;
+text-shadow: none;
+}
+
+#footer{
+  position: fixed;
+  height:90px;
+  width:100%;
+  left:0px;
+  right:0px;
+  margin-bottom:0px;
+  bottom:0px;
+}
+
+label{
+  margin-right:10px;
+}
+  </style>
+</html>

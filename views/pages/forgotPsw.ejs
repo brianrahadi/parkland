@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forgot My Password</title>
+    <%- include ("../partials/header.ejs") %>
+  </head>
+
+  <body>
+    <%- include ("../partials/nav.ejs", {loggedIn}) %>
+    <div id="body-container">
+    <div forgot-container>
+      <h1>
+        Forgot Password?
+      </h1>
+      <h2>
+        Enter your email address or username. <br />
+        we'll send you a link to reset your password.
+      </h2>
+      <form action="/forgotpsw" method="post">
+        <p>
+          <input
+            type="text"
+            id="inputBox"
+            name="uname"
+            value=""
+            placeholder="Username or Email"
+          />
+        </p>
+        <p>
+          <input type="submit" id="button" value="Submit" />
+        </p>
+        <% if (forgotPsw.state == '1') { %>
+        <p
+          class="error"
+          style="text-align: left;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:18px;"
+        >
+          Your entry does not match our records OR your account is not verified.<br>
+          Please try again.
+        </p>
+        <%} else if(forgotPsw.state == '2'){ %>
+        <p
+          class="error"
+          style="text-align: left;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: green;"
+        >
+          Your password has been sent to your email address.
+        </p>
+
+        <% } %>
+      </form>
+      <img
+        src="https://cdn.pixabay.com/photo/2014/03/25/16/32/rollercoaster-297308_960_720.png"
+        alt="logo"
+        class="logo"
+      />
+    </div>
+  </div>
+    <%- include ("../partials/footer.ejs", {loggedIn: false}) %>
+  </body>
+
+  <style>
+    #body-container{
+      margin:auto;
+      max-width:1500px;
+    }
+    #forgot-container {
+      width: 100%;
+      height: 100%;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 50px;
+      color: #000;
+      margin-top: 50px;
+      font-style: inherit;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: #000;
+      margin-top: 35px;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      margin-left: 140px;
+    }
+
+    #inputBox {
+      background-color: #fefb9d;
+      box-sizing: border-box;
+      border: 3px solid #ccc;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      outline: none;
+      border-radius: 15px;
+      text-indent: 10px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    #button {
+      background-color: #86d9ff;
+      box-sizing: border-box;
+      border: 3px solid #ccc;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      outline: none;
+      border-radius: 15px;
+      text-indent: 10px;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    }
+
+    img {
+      margin-left: 600px;
+      margin-top: -100px;
+    }
+  </style>
+</html>

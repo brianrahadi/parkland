@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content=" valueth=device- valueth, initial-scale=1.0" />
+    <title>Verify  values</title>
+  </head>
+  <body>
+    <div id="children-container">
+    <h1>Children Verification Form</h1>
+    <% if(info.access == 'admin'){ %>
+    <p style="font-size:30px;margin-top:35px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;margin-left:140px;">Please verify the correctness of information</p>
+    <% } else{ %>
+    <p>You have already submitted for approval, please wait for response</p>
+    <% } %>
+    <form action="/verifyAdmin" method="post">
+
+        <label for="fname">First name</label><input type="text" name="fname" value="<%= request.fname%>" readonly><br>
+        <label for="lname">Last name</label><input type="text" name="lname" value="<%= request.lname%>" readonly><br>
+        <label for="lname">Passport number</label><input type="number" name="passNum" value="<%= request.passport%>" value=""readonly><br>
+        <label for="dob">Date of birth</label><input type="date" name="dob" value="<%= request.dob%>" value=""readonly> <br>
+        <input type="hidden" name="kidsNum" id="kidsNum" value='<%= request.kids%>'>
+        <input type="hidden" name="uid" id="uid" value='<%= request.uid%>'>
+        <p>Children</p>
+        <div value=" values">
+            <% var i=0;
+              kids.forEach(function(k) { i++; %>
+          <label> Child <%=i%></label> <input type="text" name="fn1" value="<%=k.fname%>" readonly> <input type="text" name="ln1" value="<%=k.lname%>" readonly> <input type="date" name="dob1" value="<%=k.dob%>" readonly> <br>
+          <% }); %>
+        </div>
+        <% if(info.access == 'admin'){ %>
+        <input type="submit" value="Approve">
+        <p><button type="submit" id="button2" formaction="/reject_request"> Reject </button></p>
+        <% } %>
+        
+    </form>
+    <img src= "<%= request.passphoto %>" alt="Passport image" style="left: 200px; bottom: 400px;margin-top:-1080px">
+    <form>
+      <img
+        src="https://cdn.pixabay.com/photo/2017/01/31/15/31/boy-2025099_1280.png"
+        alt="logo"
+        class="logo"
+        />
+    </form>
+  </div>
+
+  <div class="footer">
+    <%- include ("../partials/footer.ejs") %>
+  </div>
+
+  </body>
+
+
+  <style>
+    #children-container{
+      margin:auto;
+      max-width:1500px;
+      max-height:auto;
+    }
+    h1{
+      font-size:50px;
+      color:#000;
+      margin-top:50px;
+      margin-left:-30px;
+      font-style:inherit;
+    }
+
+    /* p{
+      font-size: 30px;
+      color: #000;
+      margin-top: 35px;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      margin-left: 140px;
+    } */
+
+    input[type=text],textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid #DDDDDD;
+  text-indent: 10px;
+  width:15%;
+    }
+    input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid rgba(81, 203, 238, 1);
+}
+
+input[type=date],textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: -3px 1px 3px 0px;
+  border: 3px solid #DDDDDD;
+  width:12%;
+  cursor: pointer;
+    }
+    input[type=date]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 0px 1px 3px 0px;
+  border: 3px solid rgba(81, 203, 238, 1);
+  width:12%;
+}
+
+input[type=number],textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid #DDDDDD;
+  text-indent:10px;
+  width:15%;
+    }
+    input[type=number]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 3px solid rgba(81, 203, 238, 1);
+}
+  
+
+    input[type=file]{
+      margin-top:20px;
+      font-size:15px;
+    }
+    
+    img{
+      height: 300px;
+      margin-left: 700px;
+      margin-top: -90px;
+    }
+
+    button{
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 10%;
+  margin-top:20px;
+}
+
+button:after {
+  background-clip: padding-box;
+  background-color: #cc1744;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+button:main,
+button:focus {
+  user-select: auto;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+button:disabled {
+  cursor: auto;
+}
+input[type=submit]{
+background: #0066A2;
+color: white;
+border-style: outset;
+border-color: #0066A2;
+height: 50px;
+width: 200px;
+font: bold15px arial,sans-serif;
+text-shadow: none;
+margin-top:30px;
+}
+
+input[type=submit]:hover{
+background: #016ABC;
+color: #fff;
+border: 1px solid #eee;
+border-radius: 20px;
+box-shadow: 5px 5px 5px #eee;
+text-shadow: none;
+}
+
+#footer{
+  position: fixed;
+  height:90px;
+  width:100%;
+  left:0px;
+  right:0px;
+  margin-bottom:0px;
+  bottom:0px;
+}
+
+label{
+  margin-right:10px;
+}
+  </style>
+</html>

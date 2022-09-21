@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <style>
+    .ride {
+      /* margin: 2em; */
+      text-align: center;
+      padding: 1em;
+      border: 2px solid green;
+    }
+    .body-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .review-form {
+      width: 400px;
+      text-align: center;
+      margin-bottom: 100px;
+      border: 1px solid green;
+      padding: 20px;
+    }
+
+    form {
+      left: 0px !important;
+    }
+
+    label#info {
+      font-size: 2em;
+    }
+  </style>
+</head>
+
+<body id="wrap_addUser">
+  <%- include ("../partials/nav.ejs") %>
+  <div class="body-container">
+    <div class="ride">
+      <h1 style="left: 0px;"><%= ride.ridename %></h1>
+      <img id="lol" src="../../../img<%=ride.imagelink%>.jpg" width="400" height="400">
+    </div>
+    
+    <div class="review-form">
+      <label id="info">Username <%= info.username %> </label> 
+      <form action="/rides/<%=ride.rideid%>/updatereview/<%=review.counter%>" method="POST">
+          <p>
+            <label>Rating (1 to 5)</label><br>
+            <input type="number" name="rating" min="1" max="5" value="<%=review.rating%>" style="width: 50px;" required>
+        </p>
+        <p>
+          <label>Comment (max 200 characters)</label>
+          <textarea name="comment" id="" cols="35" rows="7" minlength="0" maxlength="200" required><%=review.comment%></textarea>
+        </p>
+        <input type="hidden" name="">
+        <input type="submit" style="width: 50%; margin-bottom: 50px;">
+      </form>
+    </div>
+  </div>
+
+  <%- include ("../partials/footer.ejs") %>
+</body>
+</html>

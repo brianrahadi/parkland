@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://checkout.stripe.com/checkout.js" defer></script>
+  <title>Top Balance</title>  
+</head>
+
+<style>
+    .checkoutform {
+        font-size: large;
+    }
+</style>
+
+
+<body>
+    <h1 >Top Balance</h1>
+    <h3>
+      <form action = "/user-api/pay" method="post" class="checkoutform">
+        Enter amount to add to Card <%=cid%> using PayPal :
+        <select name="amount" type="number">
+          <option value="5">$5</option>
+          <option value="10">$10</option>
+          <option value="25">$25</option>
+          <option value="50">$50</option>
+          <option value="100">$100</option>
+          <option value="250">$250</option>
+      </select>
+        <input type="image" src ="/paypal.png" width="100px" height="25px" value = "Checkout with PayPal">
+      
+        <input type="hidden" name = "cid" value = "<%=cid%>"/>
+        <input type="hidden" name = "uid" value = "<%=uid%>"/>
+        <input type="hidden" name = "old_balance" value = "<%=old_balance%>"/>
+       
+    </form>
+    <form action="/user-api/stripe" method="POST" class="checkoutform">
+      Enter amount to add to Card <%=cid%> using Credit Card:
+
+      <input type="hidden" name = "cid" value = "<%=cid%>"/>
+      <input type="hidden" name = "old_balance" value = "<%=old_balance%>"/>
+      <select name="amount" type="number">
+        <option value="5">$5</option>
+        <option value="10">$10</option>
+        <option value="25">$25</option>
+        <option value="50">$50</option>
+        <option value="100">$100</option>
+        <option value="250">$250</option>
+    </select>      
+      <script
+          src="//checkout.stripe.com/v2/checkout.js"
+          class="stripe-button"
+          data-key= "pk_test_51LSEnbIl2tbMd0KFXpDidTCA4SWS7kgNWyhSySmlFYptYWmv9ADm05WzaPRJXVA3JqOiuPHSZWJpMjd652dCtwIq00gO0F8t86"
+          data-amount=""
+          data-currency="usd"
+          data-name="Top Balance"
+          data-description=""
+          data-locale="auto" >
+          </script>
+      
+      </form>
+    </h3>
+    
+    
+    
+
+</body>
+
+
+</html>

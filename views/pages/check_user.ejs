@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check User</title>
+</head>
+
+<body>
+    <%- include ("../partials/nav.ejs") %>
+    <div>
+        <div class="info">
+            <h1>User Info</h1>
+            <form action="/make_admin" method="post">
+                <p>
+                    <label>User ID</label> <br>
+                    <input type="text" id = "inputBox_admin" name="uid" value="<%=user.uid %>" readonly>
+                </p>
+                <p>
+                    <label>First name</label> <br>
+                    <input type="text" id = "inputBox_admin" name="f_name" value="<%=user.f_name %>" readonly>
+                </p>
+                <p>
+                    <label>Last name</label> <br>
+                    <input type="text" id = "inputBox_admin" name="l_name" value="<%=user.l_name %>" readonly>
+                </p>
+                <p>
+                    <label>Email address</label> <br>
+                    <input type="text" id = "inputBox_admin" name="email" value="<%=user.email %>" readonly>
+                </p>
+                <p>
+                    <label>Username*</label> <br>
+                    <input type="text" id = "inputBox_admin" name="uname" value="<%=user.username %>" readonly>
+                </p>
+                <p>
+                    <label>Password*</label> <br>
+                    <input type="text" id = "inputBox_admin" name="password" value="<%=user.password %>" readonly>
+                </p>
+                <span>
+                    <label for="offer">I want to receive offers from this website</label> <br>     
+                    <% if (user.get_prom && user.get_prom == '1') { %>
+                        <input type="checkbox" id="offer" name="offer" checked onclick="return false;"> 
+                    <% } else { ;%>
+                        <input type="checkbox" id="offer" name="offer" onclick="return false;">  
+                    <% } %>
+                </span>
+                <p><button type="submit" id = "makeAdminButton" formaction="/make_admin"> Make admin </button></p>
+                <p><button type="submit" id = "deleteUser" formaction="/delete_user"> Delete User </button></p>
+            </form>
+        </div>
+
+        <div class="cards_list">
+            <h1>User's cards</h1>
+            <% cards.forEach(function(r) { %>
+                <div class="card" id="<%= r.cid%>">
+                    <p class="name">
+                        <%= r.cname %>
+                    </p>
+                    <p class="balance">
+                        Balance = <%= r.balance %>
+                    </p>
+
+                    <% var num=r.cid.toString(); %>
+                    <% while(num.length < 12) num="0 " + num; %>
+                        <p>
+                            <%= num %>
+                        </p>
+                    <form name="deleteCard" action="/user-api/deletecard" method="post">
+                        <input type="hidden" name="uid" value="<%=info.uid %>">
+                        <input type="hidden" name="cid" value="<%= r.cid %>">
+                    </form>
+                </div>
+                <% }) %>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

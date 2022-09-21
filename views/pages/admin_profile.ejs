@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Profile</title>
+  </head>
+  <style>
+    th { 
+	background: #3498db; 
+	color: white; 
+	font-weight: bold; 
+	}
+
+td, th { 
+	padding: 10px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	font-size: 18px;
+	}
+  input {
+    width: 300px !important;
+  }
+  #adminProfileContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 100px;
+  }
+
+  .user_data {
+    /* width: 80%; */
+  }
+
+  .parent_user_data {
+    margin-left: 100px;
+  }
+
+  
+  </style>
+
+  <body>
+    <%- include ("../partials/nav.ejs") %>
+    <div id="adminProfileContainer">
+      <div>
+        <h1 id="header_style">Admin Info</h1>
+
+        <form action="/user-api/updateuser/<%=info.uid%>" method="post">
+          <p>
+            <label>First Name</label> <br />
+            <input
+              type="text"
+              id="inputBox_admin"
+              name="f_name"
+              maxlength="20"
+              value="<%=info.f_name %>"
+            />
+          </p>
+          <p>
+            <label>Last Name</label> <br />
+            <input
+              type="text"
+              id="inputBox_admin"
+              name="l_name"
+              maxlength="20"
+              value="<%=info.l_name %>"
+            />
+          </p>
+          <p>
+            <label>Username</label> <label id="asterisk">*</label> <br />
+            <input
+              type="text"
+              id="inputBox_admin"
+              name="uname"
+              value="<%=info.username %>"
+              readonly
+            />
+          </p>
+          <p>
+            <label>Email</label> <br />
+            <input
+              type="text"
+              id="inputBox_admin"
+              name="email"
+              maxlength="50"
+              value="<%=info.email %>"
+            />
+          </p>
+          <span>
+            <label for="offer"
+              >I want to receive offers from this website</label
+            >
+            <br />
+            <% if (info.get_prom && info.get_prom=='1' ) { %>
+            <input type="checkbox" id="offer" name="offer" checked />
+            <% } else { ;%>
+            <input type="checkbox" id="offer" name="offer" />
+            <% } %>
+          </span>
+          <!-- <input type="hidden" name="offer" value="0"> -->
+          <input type="hidden" name="access" value="admin" />
+          <br />
+          <input type="submit" id="adminButton" value="Update Admin" />
+          <br />
+          <a href="/changepw/<%=info.uid%>">Change Password</a>
+        </form>
+      </div>
+
+      <div class="parent_user_data">
+        <h2 >List of Users</h2>
+        <div class="user_data">
+          <table>
+            <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Username</th>
+              <th>Access</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(function(r) { %>
+            <tr>
+              <td>
+                <%= r.uid %>
+              </td>
+              <% if(r.access=='user' ) { %>
+              <td>
+                <a href="/get_user/<%= r.uid %>">
+                  <%= r.username %>
+                </a>
+              </td>
+              <% } else if(r.access=='admin' ) { %>
+              <td>
+                <%= r.username %>
+              </td>
+              <% } %>
+              <td>
+                <%= r.access %>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="requests">
+        <h2>Verification Requests</h2>
+        <table>
+          <tr>
+            <th>User ID</th>
+            <th>Status</th>
+          </tr>
+          <% requests.forEach(function(r) { %>
+          <tr>
+            <td>
+              <%= r.uid %>
+            </td>
+            
+            <td>
+              <% if(r.status=='requested') { %>
+                  <a href="/get_request/<%= r.uid %>">
+              <p style="color:red;" > <%= r.status %> </p>
+              </a>
+              <%} else{%> 
+              <p style="color:blue"> <%= r.status %></p> 
+              <%} %>
+            </td>
+            <% }); %>
+          </table>
+      </div>
+    </div>
+  </body>
+</html>

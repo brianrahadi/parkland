@@ -1,0 +1,407 @@
+.jumbotron {
+  background: #1F4690;
+  color: rgb(43, 56, 231);
+  padding-bottom: 80px; }
+  .jumbotron .btn-primary {
+    background: #1F4690;
+    border-color: #1F4690; }
+    .jumbotron .btn-primary:hover {
+      background: #1F4690; }
+  .jumbotron p {
+    color: #e72525;
+    max-width: 75%;
+    margin: 1em auto 2em; }
+  .navbar + .jumbotron {
+    margin-top: -20px;
+    color: yellow;
+    background-color: #1F4690;
+  }
+  .navfooter {
+    margin-bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .jumbotron .lang-logo {
+    display: block;
+    background: #B01302;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 2px solid rgb(120, 194, 24); }
+    .jumbotron .lang-logo img {
+      max-width: 100%; }
+
+ 
+.container{
+  height: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* .requests{
+  position: absolute;
+  left:1200px;
+  bottom: 620px;
+} */
+
+/* this specical container is used to make sure the footer layer on the bottom
+and it only used in those page there is very little information */
+.bottom_container{
+  height: 80px;
+  bottom: 0px;
+  position: fixed;
+  z-index: 1;
+}
+
+form{
+  position: relative;
+  left: 150px;
+  top: 40px;
+  font-size: 20px;
+}
+
+h1{
+  position: relative;
+  left: 150px;
+  margin:auto;
+}
+
+.ques{
+  position: relative;
+  left: 150px;
+  font-size: 20px;
+}
+
+input{
+  width: 500px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.error{
+  color: #B01302;
+  font-size: 20px;
+}
+
+
+.brand{
+  width: 100px;
+  border-radius: 20%;
+  overflow: hidden;
+  margin-top: -12px;
+}
+
+.cards_list{
+
+  left:70px;
+  top:5px;
+}
+
+.card{
+ margin:auto;
+  /* margin-bottom:50px; */
+  top: 100px;
+  width: 350px;
+  height:215px;
+  font: 20px/1.5 'Helvetical Neue', Helvetica, sans-serif;
+  text-align: left;
+  vertical-align: middle;
+  color:#fff;
+  margin-top: 10px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 5px solid rgb(60, 71, 45);
+  font-family: 'work sans', sans-serif;
+  margin-bottom:15px;
+  cursor: pointer;
+  background: url(data:image/jpg;base64,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) no-repeat 0 0 #141819;
+}
+
+
+.info{
+  float: left;
+}
+
+/* start of brian's code */
+#login-container {
+  max-width: 830px;
+  margin: auto;
+  border-width:3px;
+  border-style: solid;
+  border-radius: 50px;
+  height:600px;
+  background-color: white;
+}
+
+
+.navbar {
+  background-color: #FFE5B4;
+}
+
+/* ensures header and footer is on the edge of the website */
+html, body {
+  height: 100%;
+  margin: auto;
+  padding: 0;
+  background-color: #f0fff1;
+}
+
+
+/*start of danny's code*/
+#promotional-text {
+  color: black;
+}
+
+#offer {
+  height: 20px;
+  width: px;
+}
+
+#transferMoney{
+  position: fixed;
+  margin-left: 900px;
+  margin-top: -523px;
+}
+
+h2 {
+  align-self: center;
+  font-size: 50px;
+}
+
+
+* { 
+  box-sizing:border-box
+}
+
+input[name= deleteCard] {
+  position:absolute;
+  bottom: 2px;
+  width: 130px;
+}
+
+li {
+  margin-top:15px;
+  float: left;
+}
+
+li a {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight:bolder;
+  color:#52057B;
+  font-size: 20px;
+}
+
+li a:hover:not(.active) {
+  background-color: rgb(190, 255, 198);
+}
+
+body {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-bottom:70px;
+}
+
+#createAccount {
+  margin-bottom:50px;
+  background-color: aquamarine;
+}
+
+#logIn {
+  background-color: chartreuse;
+}
+
+#asterisk
+{
+  font-size:27px;
+  color:red;
+}
+
+.user_data{
+  /* width: fit-content; */
+  overflow: auto; 
+  height: 700px;
+  /* margin-left:700px;
+  margin-top:-650px;
+  margin-bottom:20px; */
+}
+
+.user_data thead th { position: sticky; top: 0; z-index: 1; }
+
+#username_taken{
+  position: relative;
+  left: 30px;
+  color: #B01302;
+}
+
+#addUser-container {
+  max-width: 800px;
+  margin: auto;
+  border-width:3px;
+  border-style: solid;
+  border-radius: 50px;
+  height:900px;
+  background-color: white;
+}
+
+label{
+  margin-left:-5px;
+} 
+
+
+#inputBox {
+  background-color: #ffd4ec;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline:none;
+  border-radius: 15px;
+  text-indent:10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#inputBox_admin {
+  background-color: #f2fff9;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline:none;
+  border-radius: 15px;
+  text-indent:10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#inputBox:focus {
+  border: 3px solid #555;
+}
+
+#inputBox_admin:focus {
+  border: 3px solid #555;
+}
+
+input[type=checkbox] {
+  margin-right:-50px;
+}
+
+html, body {
+  height: 100%;
+}
+
+#wrap_addUser{
+  background: #f0fff1;
+}
+
+#wrap_login{
+  background: #B09B71;
+}
+
+#wrap_home{
+  background: #F8B400;
+}
+
+#header_style{
+  margin-top:60px;
+  margin-left:-40px;
+}
+
+#adminButton{
+  margin-top:30px;
+  background-color: #CC9544;
+}
+
+th, td{
+  font-family:arial;
+}
+
+table, th, td{
+  border:1px solid black;
+  width:300px;
+  text-align: center;
+}
+
+#makeAdminButton{
+  background-color: #D5D8B5;
+}
+
+#deleteUser{
+  background-color: #DD4A48;
+}
+
+.footer{
+  position: fixed;
+  height:80px;
+  width:100%;
+  left:0px;
+  right:0px;
+  margin-bottom:0px;
+  bottom:0px;
+}
+
+/* li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+} */
+
+/* .foot_container {
+  list-style-type: none;
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #FFE5B4;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+} */
+
+
+/* horizontal line */
+.hl {
+  position: absolute;
+  margin-left: 250px;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  width: 600px;
+}
+l
+/* text inside the horizontal line */
+.hl-innertext {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px 10px;
+  font-size:xx-large;
+}
+
+
+
+/* 7-27 front-end updates */
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}

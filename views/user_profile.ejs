@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body style="background-size: auto">
+    <%- include ("../partials/nav.ejs") %>
+    <div>
+      <div class="info">
+        <h1>User Info</h1>
+        <form action="/user-api/updateuser/<%=info.uid%>" method="post">
+          <p>
+            <label>First Name</label> <br />
+            <input
+              type="text"
+              name="f_name"
+              maxlength="20"
+              value="<%=info.f_name %>"
+              id = "inputBox_admin"
+            />
+          </p>
+          <p>
+            <label>Last Name</label> <br />
+            <input
+              type="text"
+              name="l_name"
+              maxlength="20"
+              value="<%=info.l_name %>"
+              id = "inputBox_admin"
+            />
+          </p>
+          <p>
+            <label>Username</label> <br />
+            <input
+              type="text"
+              name="uname"
+              value="<%=info.username %>"
+              readonly
+              id = "inputBox_admin"
+            />
+          </p>
+          <p>
+            <label>Email</label> <br />
+            <input
+              type="text"
+              name="email"
+              maxlength="50"
+              value="<%=info.email %>"
+              id = "inputBox_admin"
+            />
+          </p>
+          <span>
+            <label for="offer"
+              >I want to receive offers from this website</label
+            >
+            <br />
+            <% if (info.get_prom && info.get_prom == '1') { %>
+            <input type="checkbox" id="offer" name="offer" checked />
+            <% } else { ;%>
+            <input type="checkbox" id="offer" name="offer" />
+            <% } %>
+          </span>
+          <input type="hidden" name="access" value="user" />
+          <br />
+          <input type="submit" value="Update user" id="adminButton" />
+          <br />
+          <br />
+          <a href="/changepw/<%=info.uid%>">Change Password</a>
+        </form>
+      </div>
+
+      <div class="cards_list">
+        <h1>My Cards</h1>
+        <% cards.forEach(function(r) { %>
+        <div class="card" id="<%= r.cid%>">
+          <form action="">
+            <p
+              type="text" name="name" value="<%=r.cname%>"
+              style="position:relative;
+                    bottom:100px;
+                    right:100px;"
+            ><%=r.cname%></p>
+          </form>
+          <% var num = r.cid.toString(); %> <% while(num.length < 12) num = "0 "
+          + num; %>
+          <p style="margin-left:10px">Card Number : <%= num %></p>
+          <p class="balance" style="margin-left:10px">Balance : <%= r.balance %></p>
+
+          <form name="deleteCard" action="/user-api/deletecard" method="post">
+            <input type="hidden" name="uid" value="<%=info.uid %>" />
+            <input type="hidden" name="cid" value="<%= r.cid %>" />
+            <input type="submit" name="deleteCard" value="delete card" id="deleteUser" />
+          </form>
+        </div>
+        <% }) %> <% if(cards.length < 3) { %>
+        <form name="addCard" action="/user-api/addcard" method="post">
+          <input type="hidden" name="uid" value="<%=info.uid %>" />
+          <input type="submit" id = "logIn" value="Add a new card" style="margin-top:40px"/>
+        </form>
+        <% } %>
+      </div>
+      <script>
+        function myFunc()
+      </script>
+    </div>
+  </body>
+</html>

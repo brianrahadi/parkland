@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <%- include ("../partials/header.ejs") %>
+</head>
+
+<body id="wrap_addUser">
+    <%- include ("../partials/nav.ejs", {loggedIn: false}) %>
+    <div id="addUser-container" background-color:>
+        <h1 id="header_style">Create a new account</h1>
+        <p class="ques">Already have an account? <a href="/login"> Sign in </a></p>
+        <form action="/user-api/adduser" method="post">
+            <p>
+                <label>First Name (optional)</label> <br>
+                <input type="text" id=inputBox name="f_name" maxlength="20" value="">
+            </p>
+            <p>
+                <label>Last Name (optional)</label> <br>
+                <input type="text" id=inputBox name="l_name" maxlength="20" value="">
+            </p>
+            <p>
+                <label>Username</label> <label id="asterisk">*</label>
+                <% if(taken==1){ %> <label id="username_taken"> Username already taken! </label>
+                    <% } %> <br>
+                        <input type="text" id=inputBox name="uname" value="" minlength="8" maxlength="20" onkeypress="return event.charCode != 32" required>
+            </p>
+            <p>
+                <label>Email(optional)</label>
+                <br><input type="text" id=inputBox name="email" maxlength="50" value="">
+            </p>
+            <p>
+                <label>Password</label> <label id="asterisk">*</label> <br>
+                <input type="password" id=inputBox name="password" value="" minlength="8" maxlength="20" onkeypress="return event.charCode != 32" required>
+            </p>
+            <span>
+                <label for="offer">I want to receive offers from this website</label>
+                <input type="checkbox" id="offer" name="offer" checked="checked">
+                <!--
+            <span style="text-align: center;">
+            Would you like to receive offers and updates?
+            </span>
+            -->
+            </span>
+            <!-- <input type="hidden" name="offer" value="0"> -->
+            <p><input type="submit" id="createAccount" value="Create Account"></p>
+        </form>
+
+    </div>
+    <script>
+       
+    </script>
+</body>
+
+</html>

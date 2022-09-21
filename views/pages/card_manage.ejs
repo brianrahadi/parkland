@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card</title>
+  </head>
+
+  <body>
+    <%- include ("../partials/nav.ejs") %>
+        <!-------------------------Card Info-------------------------->
+      <div id="card-container">
+      <div class="card">
+        <form action="/card/name_change" method="post" id="name_change">
+          <input
+            type="text"
+            name="name"
+            value="<%=r.cname%>"
+            maxlength="20"
+            style="background-color: #1c0aa1; width: 150px; height: 30px; position: relative; bottom:40px; right:80px; text-align: center;"
+            onchange="document.getElementById('name_change').submit()"
+          />
+          <input type="hidden" name="cid" value="<%=r.cid%>" />
+        </form>
+        <% var num = r.cid.toString(); %> <% while(num.length < 7) num = "0" +
+        num;
+        const num_space = num.split('').join(' ');
+         %>
+        <p> <%= num_space %></p>
+        <p>
+          Balance : <%= r.balance %>
+        </p>
+
+        <form name="deleteCard" action="/user-api/deletecard" method="post">
+          <input type="hidden" name="uid" value="<%=info.uid %>" />
+          <input type="hidden" name="cid" value="<%= r.cid %>" />
+          <input
+            type="submit"
+            name="deleteCard"
+            value="delete card"
+            id="deleteUser"
+          />
+        </form>
+      </div>
+    </div>
+
+<!-------------------------Top Balance-------------------------->
+<div id="balance-container">
+    <form name="topbalance" action="/user-api/topbalance" method="post">
+      <input type="hidden" name = "cid" value = "<%= r.cid %>"/>
+      <input type="hidden" name = "uid" value = "<%= info.uid %>"/>
+
+      <input type ="submit" name = "topbalance" value = "Top balance" style="margin-left:90px;">
+    </form>
+
+      <!-- <h2 onclick="myFunc()">
+        Top Balance <span class="glyphicon glyphicon-chevron-down"></span>
+      </h2>
+      <div id="top_balance" style="margin-left: -100px">
+      </div> -->
+  </div>
+
+  <!-------------------------Card History-------------------------->
+  <div id="history-container">
+      <h2 onclick="myFunc2()" style="margin-left: 300px; margin-bottom:20px">
+        See card history <span class="glyphicon glyphicon-chevron-down"></span>
+      </h2>
+      <div id="card_log" style="margin-left: 290px">
+        <%- include ("../pages/card_log.ejs") %>
+      </div>
+    </div>
+    <%- include ("../partials/footer.ejs", {loggedIn: false}) %>
+  </body>
+
+  <script>
+    function myFunc() {
+      var disp = document.getElementById("top_balance").style.display;
+      if (disp == "none")
+        document.getElementById("top_balance").style.display = "block";
+      else document.getElementById("top_balance").style.display = "none";
+    }
+    function myFunc2() {
+      var disp = document.getElementById("card_log").style.display;
+      if (disp == "none")
+        document.getElementById("card_log").style.display = "block";
+      else document.getElementById("card_log").style.display = "none";
+    }
+  </script>
+
+<style>
+
+
+#card-container{
+  margin:auto;
+  margin-left:0px;
+  margin-top:80px;
+
+}
+
+#balance-container{
+  margin:auto;
+  max-width:1000px;
+  margin-top:40px;
+
+  height:150px;
+}
+
+#history-container{
+  margin:auto;
+  max-width:1000px;
+  max-height:max-content;
+}
+
+</style>
+
+</html>

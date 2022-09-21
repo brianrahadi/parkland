@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body>
+
+  <%- include ("../partials/nav.ejs", {loggedIn}) %>
+  <div id="body-container">
+  <h1>
+    Contact Us
+  </h1>
+  <h2>
+    Please feel free to contact us if you need any further information.
+  </h2>
+  <h3>
+    Address: 8888 University Dr, Burnaby, BC V5A 1S6 <br>
+    Phone: (778) 782-3111 <br>
+    Open Monday - Friday, 8 a.m.-8 p.m.
+  </h3>
+  <form>
+    <img
+      src="https://cdn.pixabay.com/photo/2020/11/10/22/28/contact-us-5731121_1280.png"
+      alt="logo"  
+    />
+  </form>
+  </div>
+  
+
+
+
+    <%- include ("../partials/footer.ejs", {loggedIn: false}) %>
+</body>
+<style>
+    #body-container{
+      margin:auto;
+      max-width: 1500px;
+    }
+
+      h1 {
+      font-size: 50px;
+      color: #000;
+      margin-top: 50px;
+      font-style: inherit;
+      margin-left:-20px;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: #000;
+      margin-top: 35px;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      margin-left: 140px;
+    }
+
+    h3{
+      margin-left: 200px;
+      font-size:30px;
+      margin-top:70px;
+    }
+
+    img{
+      height:300px;
+      margin-left:600px;
+      margin-bottom:40px;
+    }
+
+</style>
+</html>

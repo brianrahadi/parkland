@@ -1,0 +1,73 @@
+<style>
+  #table1{ 
+	width: 600px; 
+	border-collapse:initial;
+	margin:0px auto;
+  
+	}
+
+.tableFixHead          { overflow: auto; height: 500px; width: 620px; position: relative; right: 100px;}
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+th { 
+	background: #3498db; 
+	color: white; 
+	font-weight: bold; 
+	}
+
+td, th { 
+	padding: 10px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	font-size: 18px;
+	}
+
+.labels tr td {
+	background-color: #2cc16a;
+	font-weight: bold;
+	color: #fff;
+}
+
+/* .label tr td label {
+	display: block;
+} */
+</style>
+
+<div class="tableFixHead">
+<table id="table1">
+  <thead>
+    <tr>
+      <th style="width: 10%">Time</th>
+      <th style="width: 75%">Event</th>
+      <th style="width: 15%">Balance</th>
+    </tr>
+  </thead>
+
+  <% var date = ""; logs.forEach(function(l) { if(l.date != date){ %>
+  
+  <tbody class="labels">
+    <tr>
+      <td colspan="3">
+        <label><%= l.date %></label>
+        <% date = l.date; %>
+      </td>
+    </tr>
+  </tbody>
+  <% } %>
+  <tbody>
+  <tr>
+    <td style="width: 10%">
+      <%= l.time %>
+    </td>
+    <td style="width: 75%">
+      <%= l.text %>
+    </td>
+    <td style="width: 15%">
+      <%= l.balance %>
+    </td>
+  </tr>
+</tbody>
+
+  <% }); %>
+</table>
+</div>

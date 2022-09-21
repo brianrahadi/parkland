@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <%- include ("../partials/header.ejs") %>
+    <style>
+
+    </style>
+</head>
+
+<body id="wrap_home">
+  <%- include ("../partials/nav.ejs") %>
+
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h2 style="color:yellow">CKA LAND Amusement Park</h2>
+        <h4 style="color:yellow">Since 2006</h4>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th> Current Weather </th>
+        <th> <%=weather%></th>
+      </tr>
+      <tr>
+        <th> Temperature </th>
+        <th> <%=temp%> °C</th>
+      </tr>
+      <tr>
+        <th> Feels like </th>
+        <th> <%=feels_like%> °C</th>
+      </tr>
+      <tr>
+        <th> Wind </th>
+        <th> <%=wind%> km/h </th>
+      </tr>
+      <tr>
+        <th> Humidity </th>
+        <th> <%=humidity%> %</th>
+      </tr>
+      <tr>
+        <th> Visibility </th>
+        <th> <%=visibility%> m</th>
+      </tr>
+    </table>
+  </div>
+
+    <div style="margin:auto">
+      Weather info from openweathermaps.org
+    </div>
+
+    <%- include ("../partials/footer.ejs") %>
+</body>
+
+<style>
+  table{
+    width:50%;
+    margin-left: 400px;
+    background-color: antiquewhite;
+    font-size: xx-large;
+    margin: auto;
+  }
+
+div {
+      text-align: center;
+      font-size: 40px;
+      height:200px;
+    }
+
+ #weather-container {
+      height: 50px;
+    }
+</style>
+
+</html>

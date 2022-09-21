@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <style>
+    .ride {
+      /* margin: 2em; */
+      text-align: center;
+      padding: 1em;
+      border: 10px dotted green;
+      height: fit-content;
+    }
+    .body-container {
+      max-width: 1200px;
+      margin: auto;
+      padding-bottom: 75px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .reviews {
+      overflow: auto; 
+      height: 700px; 
+      width: 600px;
+      border: 1px solid black;
+      background-color: #F0EBE3;
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .user-review {
+      border-top: 1px solid black;
+
+      color: darkgreen;
+    }
+
+    .descriptor {
+      color: black;
+    }
+    
+    .add-review {
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: green;
+    }
+
+    .thumbs-container {
+      float:right;
+      font-size: 1.3em;
+    }
+
+    .edit-container {
+      float:right;
+      margin-bottom: 10px;
+      position: relative;
+      right: 0px;
+      bottom: 35px;
+    }
+
+    .comment-paragraph {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    img {
+      border-radius: 20px;
+    }
+
+    .ride-info {
+      font-size: 1.5em;
+      text-align: center;
+      padding-top: 30px;
+    }
+
+    .ride-info table {
+      margin: auto;
+    }
+    .ride-info table, .ride-info th, .ride-info td {
+      border: 3px solid gray; 
+    }
+  </style>
+</head>
+
+<body id="wrap_addUser">
+  <%- include ("../partials/nav.ejs") %>
+  <div class="body-container">
+    <div class="ride">
+      <h1 style="left: 0px;"><%= ride.ridename %></h1>
+      <p style="font-size: 1.5em"><%= ride.ridedescription %></p>
+      <img src="../img<%=ride.imagelink%>.jpg" width="400" height="400">
+      <div class="ride-info">
+        <table>
+          <th colspan="2">Ride Info</th>
+          <tr>
+            <th>Price</th>
+            <td>$<%= ride.price %></td>
+          </tr>
+          <tr>
+            <th>Min Age</th>
+            <td><%= ride.age %> years</td>
+          </tr>
+          <tr>
+            <th>Min Height</th>
+            <td><%= ride.height %> cm</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="review-all">
+      <div class="reviews">
+        <h3 style="text-align: center;">Reviews</h3>
+        <% reviews.forEach((r) => { %>
+          <div class="user-review">
+            <!-- <div class="thumbs-container">
+              <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;<%= r.likes %>&emsp;
+              <i class="glyphicon glyphicon-thumbs-down"/></i>&nbsp;<%= r.dislikes %>
+            </div> -->
+            <p><span class="descriptor">Username</span>: <%= r.username %></p>
+        
+            <p><span class="descriptor">Rating: </span>
+              <% for (let i = 0; i < 5; i++) { %>
+                <% if (i < r.rating) { %>
+                  <i class="glyphicon glyphicon-star"></i>
+                <% } else { %>
+                  <i class="glyphicon glyphicon-star-empty"></i>
+                <% } %>
+              <% } %>
+            </p>
+            <p class="comment-paragraph">
+              <span class="descriptor">Comment</span>: <%= r.comment %>
+            </p>
+            <p>
+              <% if (typeof info != "undefined" && (info.access == 'admin' || r.uid == info.uid)) { %>
+                <div class="edit-container">
+                    <button>
+                      <a style="color: darkblue;"href="/rides/<%=ride.rideid%>/updatereview/<%=r.counter%>">Update review</a>
+                    </button>
+                    <form action="/rides/<%=ride.rideid%>/deletereview/<%=r.counter%>" method="POST" style="display: inline; left: 0px; right: 0px; top: 0px;">
+                      <input style="color: darkred; width:auto; height: auto; font-size: 14px;" type="submit" value="Delete review">
+                    </form>
+                </div>    
+                <% } %>
+            </p>
+
+          </div>
+        <% }) %>
+      </div>
+
+      <% if (typeof info != "undefined") { %>
+        <div class="add-review">
+          <button style="margin: auto;">
+            <a href="/rides/<%=ride.rideid%>/addreview">Add a review</a>
+          </button>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include ("../partials/footer.ejs") %>
+</body>
+
+</html>

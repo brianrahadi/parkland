@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Password</title>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body>
+  <%- include ("../partials/nav.ejs", {loggedIn: true}) %>
+  <div id="password-container">
+  <div id=" login-container" style="height: 500px">
+    <h1 style="margin-left:-40px;">Change password</h1>
+
+    <form action="/user-api/changepw/<%=info.uid%>" method="post" style="top: 25px">
+      <% if (info.incorrectpw == 1) { %>
+        <p class="error"> Incorrect Old Password. Make sure to enter the correct one!</p>
+      <% } else if (info.incorrectpw == 0) { %>
+        <p style="color: green;"> Password successfully changed. Redirecting to user profile in 2 seconds.</p>
+        <% let link = info.access=='user' ? 'dashboard' : 'admin' ; %>
+        <script>
+          let pathName = '/<%=link%>/<%=info.uid%>';
+          setTimeout(
+            () => {
+              document.location.pathname = pathName;
+            },
+            2000
+          )
+        </script>
+      <% } else if (info.incorrectpw == 3) { %>
+        <p class="error"> Password not changed. Old password is the same as new password.</p>
+      <% } %>
+        <p>
+          <label>Username: <%=info.username%></label> <br>
+        </p>
+        <p>
+          <label>Old Password *</label> <br>
+          <input type="password" name="old_password" maxlength="20" value="" required>
+        </p>
+        <p>
+          <label>New Password *</label> <br>
+          <input type="password" name="new_password" minlength="8" maxlength="20" value="" onkeypress="return event.charCode != 32" required>
+        </p>
+        <input type="hidden" name="uname" value="<%=info.username%>">
+        <p>
+          <input type="submit" id="createAccount" value="Change Password">
+        </p>
+    </form>
+
+    <form>
+      <img
+        src="https://cdn.pixabay.com/photo/2013/04/01/09/02/read-only-98443_960_720.png"
+        />
+    </form>
+
+  </div>
+</div>
+  <%- include ("../partials/footer.ejs") %>
+</body>
+
+<style>
+  #password-container{
+    margin:auto;
+    max-width: 1500px;
+    margin-top:50px;
+  }
+
+  img{
+    margin-left:800px;
+    height:300px;
+  }
+</style>
+
+</html>
