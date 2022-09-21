@@ -1,39 +1,15 @@
-# node-js-getting-started
+# Parkland
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+Stack: HTML, CSS, JavaScript, JavaScript, Node.js, EJS, PostgresQL, Stripe API, WeatherAPI, Mocha, Chai
 
-This application supports the [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+This is an academic project built in a group of 4. Some of the codes might not written with a best practice in mind due to some of the members having the first exposure to web development in this course. However, I have learned a great deal in how to make a full-stack web application.
 
-## Running Locally
+My personal accomplishments included, but not limited to:
+-	Implemented all the frontend, backend, and databases of the rides review system for full CRUD functionality
+- Developed 39 test cases using Mocha and Chai to ensure database retrieval run smoothly
+-	Fixed the layout of the homepage, user, and admin dashboard with CSS Flexbox
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+Currently, Website is down due to issues with Heroku. However, I have the demo video listed here.
+https://www.youtube.com/watch?v=eMDrgqQ6-TY&list=PLsMwgYc1l_V03D-kKRaXcnumVEb8k8ot_&index=2
 
-```sh
-$ git clone https://github.com/heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```
-$ heroku create
-$ git push heroku main
-$ heroku open
-```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
